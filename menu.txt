@@ -1,0 +1,5 @@
+**********************************************
+*       				SNAKE GAME					         *
+**********************************************
+Creado y distribuido por Grupo 2 S.A.
+Ningun derecho de autor reservado
