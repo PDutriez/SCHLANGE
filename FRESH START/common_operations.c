@@ -5,7 +5,7 @@
 #define LOOSER 4 //Valor que devuelve CHKSCORE si no fue mejor que nadie
 #define MAX_SCORES 3 //Cantidad de jugadores que quiero en la lista
 
-void main(void)//MAIN DE PRUEBA
+int main(void)//MAIN DE PRUEBA
 {
   char prueba=chkscore("score.txt",295);
   printf("POSICION:%d\n",prueba);
@@ -18,6 +18,7 @@ void main(void)//MAIN DE PRUEBA
   {
     printf("LOOSER\n");
   }
+  return 0;
 }
 char chkscore(char* topscores,int score)
 {
@@ -84,12 +85,10 @@ int writescore(char* topscores,char* name,int score)
               strcpy(lines[line_counter],lines[line_counter-1]);
               ++lines[line_counter][0];//Aumentamos el indice
             }
-
             sprintf(lines[position-1],"%d %s %d\n",position,name,score);//Copiamos el nuevo PUNTAJE
 
             for(line_counter=0;(line_counter<MAX_SCORES)&&lines[line_counter][0]!='\0';++line_counter)
                 fprintf(copia, "%s", lines[line_counter]);//Copiamos el archivo
-
             fclose(archivo);//No te olvides de cerrrar lo que abris
             fclose(copia);
             remove(topscores);// remove the original file
