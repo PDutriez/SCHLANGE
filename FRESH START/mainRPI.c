@@ -9,6 +9,7 @@
 #include "disdrv.h"
 #include "schlange.h"
 
+typedef enum {END,MENU,PLAY} actions_t;
 #define JOY_THRESHOLD 40     // 10-100 Joystick threshold (sensitivity)
 int modul(int a);	//Funcion que devuelve el modulo de un numero
 void* printfile(char* nombre); //Funcion que imprime un archivo (error:NULL)
@@ -19,7 +20,7 @@ static void charge_matrix(void)
 static char* difnames[3]={"Facil  ","Normal ","Dificil"};
 static jcoord_t joy_coordinates1;  //Variable para los valores del joystick
 static jswitch_t joy_switch1=J_NOPRESS; //Variable para el switcher
-static char c, dificultad=FACIL,pausa=0,direction=0; //Varable que indica la direccion de la serpiente
+static char dificultad=FACIL,direction=0; //Varable que indica la direccion de la serpiente
 static int i,j;
 static body_t** snake;  //Puntero a la serpiente
 static body_t** apple;  //Puntero a la manzana
@@ -30,7 +31,6 @@ static sem_t  semaforo; //semaforo del juego
 
 void* mainsnake()
 {
-  char juego=1;
   snake=initsnake(dificultad); //Creamos la serpiente y seteamos la dificultad
   sem_wait(&semaforo);
   printf("Hay algun problema?");
@@ -182,6 +182,7 @@ int modul(int a)
 }
 void* printfile(char* nombre)
 {
+    int c;
     FILE* puntero=fopen(nombre, "r");
     if(puntero==NULL)
     {
