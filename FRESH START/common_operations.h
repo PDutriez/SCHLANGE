@@ -1,5 +1,7 @@
 #ifndef COMMON_OPERATIONS_H
 #define COMMON_OPERATIONS_H
+
+#define LOOSER 4 //Valor que devuelve CHKSCORE si no fue mejor que nadie
 /*******************************************************************************
 * FUNCIONES
 *******************************************************************************/
@@ -14,7 +16,7 @@ int writescore(char* topscores,char* name,int score);
 
 int conver2int(char* string);
 //CONVER2INT convierte un string de numeros en un entero que es el valor que
-// devuelve
+// devuelve.
 
 
 #endif

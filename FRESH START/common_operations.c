@@ -2,10 +2,9 @@
 #include <string.h>
 #include "common_operations.h"
 #define MAX_LINE 256
-#define LOOSER 4 //Valor que devuelve CHKSCORE si no fue mejor que nadie
 #define MAX_SCORES 3 //Cantidad de jugadores que quiero en la lista
 
-void main(void)//MAIN DE PRUEBA
+/*void main(void)//MAIN DE PRUEBA
 {
   char prueba=chkscore("score.txt",295);
   printf("POSICION:%d\n",prueba);
@@ -18,7 +17,7 @@ void main(void)//MAIN DE PRUEBA
   {
     printf("LOOSER\n");
   }
-}
+}*/
 char chkscore(char* topscores,int score)
 {
     char position=1;

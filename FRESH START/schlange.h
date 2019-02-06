@@ -18,18 +18,22 @@ typedef struct body{
 * FUNCIONES
 *******************************************************************************/
 //Initsnake crea la serpiente, limpia la matriz, reinicia el SCORE y setea el
-// nivel con el que inicia el jugador. Devuelve la posicion del puntero a la
-// cabeza que se actualiza solo (Por eso se lo pasa una sola vez)
-body_t** initsnake(char dificultad);
+// nivel con el que inicia el jugador, ademas carga el puntaje del juego a un
+// puntero recibido. Devuelve la posicion del puntero a la cabeza que se
+// actualiza solo (Por eso se lo pasa una sola vez)
+body_t* initsnake(char dificultad,int** otherscore);
 
 //Treat se encarga de poner una manzana en la posicion correcta, en caso de
 // error devuelve NULL, en caso contrario devuelve un puntero a "apple"
-body_t** treat(void);
+body_t* treat(void);
 
+//NEW_DIRECTION se encarga de modificar la direccion donde gira la serpiente.
+// Recibe la nueva direccion y no devuelve nada.
+void new_direction(char mydirection);
 //Moove se encarga de mover la serpiente, analiza todos los casos de choque,
 // ademas agranda la serpiente si comio la manzana. Devuelve el valor de la
 // direccion en caso de haber cambiado. Si murio o termina el juego, devuelve 0.
-char moove(char direction);
+body_t* moove(void);
 
 //GET_POSITION devuelve la posicion de una casilla dentro de la matriz del Juego
 // en caso de error devuelve 0xFFFF que es un valor fuera de rango de la matriz
