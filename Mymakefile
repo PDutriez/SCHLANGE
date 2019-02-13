@@ -1,0 +1,42 @@
+#Para crear ejecutable para allegro, ejecutar make file con el target: allegrosnake
+allegrosnake: Allegro/allegro_main.o Common/common_operations.o Common/schlange.o
+	gcc Allegro/allegro_main.o Common/common_operations.o Common/schlange.o `pkg-config --libs allegro-5` `pkg-config --libs allegro_color-5` `pkg-config --libs allegro_font-5` `pkg-config --libs allegro_ttf-5` `pkg-config --libs allegro_acodec-5` `pkg-config --libs allegro_audio-5` `pkg-config --libs allegro_primitives-5` `pkg-config --libs allegro_image-5`  -o al_snake
+
+#Para crear ejecutable para la Raspberry pi, ejecutar el makefile con el target: pisnake
+pisnake: PI/mainRPI.o Common/common_operations.o Common/schlange.o PI/RPI_LIB/joydrv.o PI/RPI_LIB/disdrv.o PI/RPI_LIB/termlib.o PI/mydisplay.o PI/libaudio.o
+	gcc PI/mainRPI.o RPI_LIB/mydisplay.o Common/common_operations.o Common/schlange.o PI/libaudio.o RPI_LIB/joydrv.o RPI_LIB/disdrv.o RPI_LIB/termlib.o -lpthread -I/usr/local/include -L/usr/local/lib -lSDL -o rpi_snake
+
+#Archivos a compilar, solo archivos objeto (sin linkeditar)
+
+#Comunes a Allegro y Pi
+
+Common/common_operations.o: Process_Snake/common_operations.c Process_Snake/common_operations.h
+	gcc -c Process_Snake/common_operations.c -o Common/common_operations.o
+
+Common/schlange.o: Process_Snake/schlange.c Process_Snake/schlange.h
+	gcc -c Process_Snake/schlange.c -o Common/schlange.o
+
+#Interfaz Allegro
+
+Allegro/allegro_main.o: allegro_main.c
+	gcc -c allegro_main.c -o Allegro/allegro_main.o
+
+#Interfaz pi
+
+PI/mainRPI.o: mainRPI.c
+	gcc -c mainRPI.c -o files/PI/mainRPI.o
+
+PI/mydisplay.o: PI/mydisplay.c PI/mydisplay.h
+	gcc -c PI/mydisplay.c -o PI/mydisplay.o
+
+PI/libaudio.o: PI/libaudio.c PI/libaudio.h
+	gcc -c libaudio.c -o PI/libaudio.o
+
+clean_pi:
+	rm files/Pi/*.o
+	rm files/Common/*.o
+
+
+clean_allegro :
+	rm Object\ files/Allegro/*.o
+	rm Object\ files/Common/*.o
